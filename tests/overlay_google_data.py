@@ -1,9 +1,30 @@
+"""Overlay a Google Maps location annotation onto a correctly-positioned
+background image. Here is how I suggest using this:
+
+- Use the Google Static Maps API with a key set up (adults must sign the terms of
+service, I think: https://developers.google.com/maps/documentation/maps-static/get-api-key)
+- Use Google Maps to get the latitude or longitude of the location of an ISS photo (click a location
+on the map and copy the two numbers that appear).
+- Use your API key to get two images in your web browser at the following URLs (please ensure you replace {LATITUDE} and {LONGITUDE} with decimal numbers in degrees
+and {YOUR API KEY} as well. You can change the zoom/center parameters to fit your photo better.
+Under Layer: https://maps.googleapis.com/maps/api/staticmap?center={LATITUDE},{LONGITUDE}&zoom=7&format=png&size=432x324&maptype=roadmap&style=feature:administrative|visibility:off&style=feature:landscape|color:0x000000&style=feature:water|color:0xffffff&style=feature:road|visibility:off&style=feature:transit|visibility:off&style=feature:poi|visibility:off&key={YOUR API KEY}
+Over Layer: https://maps.googleapis.com/maps/api/staticmap?center={LATITUDE},{LONGITUDE}&zoom=7&format=png&size=432x324&maptype=roadmap&style=feature:landscape|color:0x888888&style=feature:water|color:0x888888&style=feature:road|visibility:off&style=feature:transit|visibility:off&style=feature:poi|visibility:off&key={YOUR API KEY}
+
+You may change the styling of the land contours or remove "visibility:off" parts to show roads, ferry routes (transit), etc.
+as long as you keep the zoom, size and center parameters the same for each (can be changed, but has to be changed in both).
+
+- Right-click the images loaded and save them as `{place name}_under.png` and `{place name}_over.png`, then edit the under layer with something like Paint 3D
+TODO
+"""
+
 import cv2 as cv
 import numpy as np
 
-FILENAME_OVERLAY = "data/test_overlay.png"
-FILENAME_IN = "data/62.png"
-FILENAME_OUT = "data/test_result.png"
+place = "reunion"
+
+FILENAME_OVERLAY = f"data/{place}_over.png"
+FILENAME_IN = f"data/{place}_under.png"
+FILENAME_OUT = f"data/{place}_result.png"
 
 overlay = cv.imread(FILENAME_OVERLAY)
 overlay_b, overlay_g, overlay_r = cv.split(overlay) # 1 channel

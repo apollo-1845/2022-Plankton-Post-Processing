@@ -1,6 +1,11 @@
+"""Combine recorded images to create 1 long image
+with all of them joined together, automatically"""
+
+FIRST_IMAGE_I = 57  # included, uses images with filenames {i}.png
+LAST_IMAGE_I = 67  # included
+
 import cv2 as cv
 import numpy as np
-import math
 
 IMAGE_SHAPE_NP = (1944, 2592, 3)
 COVER_CENTRE = (2592//2, 1944//2)
@@ -72,6 +77,8 @@ def combine_images(image_1_x_offset, image_1_y_offset, image_1, image_2, x_movem
     elif(x_movement+x_offset > (image_1.shape[1]-image_2.shape[1])):  # Moving beyond right side of image
         x_offset += x_movement
         image_1 = np.hstack((image_1, np.zeros((image_1.shape[0], x_movement+x_offset-(image_1.shape[1]-image_2.shape[1]), image_1.shape[2]), dtype=image_1.dtype)))  # Shape is y, x, depth
+    else:
+        x_offset += x_movement
     if (y_movement+y_offset < 0):  # Moving beyond top of image
         image_1 = np.vstack((np.zeros((-y_movement-y_offset, image_1.shape[1], image_1.shape[2]), dtype=image_1.dtype), image_1)) # Shape is y, x, depth
     elif(y_movement+y_offset > (image_1.shape[0]-image_2.shape[0])):  # Moving beyond bottom of image
@@ -87,7 +94,7 @@ def combine_images(image_1_x_offset, image_1_y_offset, image_1, image_2, x_movem
     # Image 1 now refers to the combined image
     return (image_1, x_offset, y_offset)
 
-images = list((cv.imread(f"data/{i}.png")) for i in range(74, 90))
+images = list((cv.imread(f"data/{i}.png")) for i in range(FIRST_IMAGE_I, LAST_IMAGE_I))
 
 
 x_movement, y_movement = 0, 0
@@ -103,4 +110,4 @@ for i in range(1, len_images):
     x_movement, y_movement = get_movement_vector(images[i-1], images[i])
     result, x_offset, y_offset = combine_images(x_offset, y_offset, result, images[i], x_movement, y_movement)
 
-cv.imwrite("data/Europe-Greece-Turkey-Cyprus.png", result)
+cv.imwrite("data/Sudan-Ethiopia.png", result)
