@@ -1,1 +1,1 @@
-import tests.combine_images
+import tests.overlay_google_data
