@@ -1,1 +1,1 @@
-import tests.generate_ndvi
+import tests.overlay_google_data

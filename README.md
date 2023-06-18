@@ -1,6 +1,6 @@
-![](data/ignore/istanbul_result.png)
-![](data/ignore/danube_result.png)
-![](data/ignore/channel_result.png)
+![](data/istanbul_result.png)
+![](data/danube_result.png)
+![](data/channel_result.png)
 
 ## Image Locations
 0 - (Sea) S of Tasmania -49.34310914710364 150.5908625415843

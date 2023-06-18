@@ -20,10 +20,10 @@ TODO
 import cv2 as cv
 import numpy as np
 
-place = "reunion"
+place = "normandy"
 
-FILENAME_OVERLAY = f"data/{place}_over.png"
-FILENAME_IN = f"data/{place}_under.png"
+FILENAME_OVERLAY = f"data/ignore/{place}_over.png"
+FILENAME_IN = f"data/ignore/{place}_under.png"
 FILENAME_OUT = f"data/{place}_result.png"
 
 overlay = cv.imread(FILENAME_OVERLAY)
