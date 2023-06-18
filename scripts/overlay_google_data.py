@@ -13,14 +13,18 @@ Over Layer: https://maps.googleapis.com/maps/api/staticmap?center={LATITUDE},{LO
 You may change the styling of the land contours or remove "visibility:off" parts to show roads, ferry routes (transit), etc.
 as long as you keep the zoom, size and center parameters the same for each (can be changed, but has to be changed in both).
 
-- Right-click the images loaded and save them as `{place name}_under.png` and `{place name}_over.png`, then edit the under layer with something like Paint 3D
-TODO
+- Right-click the images loaded and save them as `{place name}_under.png` and `{place name}_over.png` in data/ignore, then edit the
+under layer to add your NDVI image in the correct location (I paste the NDVI image, select "convert to sticker",
+Ctrl+Z a few times, then add the image from the stickers list with 50% opacity, resize the image, then set the opacity
+to 100).
+
+- Paste your place name in the filename below, then run this script.
 """
 
 import cv2 as cv
 import numpy as np
 
-place = "normandy"
+place = "ethiopiannatparks"
 
 FILENAME_OVERLAY = f"data/ignore/{place}_over.png"
 FILENAME_IN = f"data/ignore/{place}_under.png"

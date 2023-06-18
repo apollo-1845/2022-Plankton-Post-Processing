@@ -6,17 +6,16 @@ sea will be masked out black and clouds will be grey."""
 import cv2 as cv
 import numpy as np
 
-USE_WHOLE_IMAGE = True # To crop the image in the process, set this to False.
-MIN_X = 0 # X-coordinate of left side of crop you want (look in bottom status bar of MS Paint)
-MIN_Y = 0 # Y-coordinate of top side of crop you want
-MAX_X = 100 # X-coordinate of right side of crop you want
-MAX_Y = 100 # Y-coordinate of bottom side of crop you want
+USE_WHOLE_IMAGE = False # To crop the image in the process, set this to False.
+MIN_X = 690 # X-coordinate of left side of crop you want (look in bottom status bar of MS Paint)
+MIN_Y = 6460 # Y-coordinate of top side of crop you want
+MAX_X = 1640 # X-coordinate of right side of crop you want
+MAX_Y = 8420 # Y-coordinate of bottom side of crop you want
 
 # FILENAME_IN = "data/Europe-Greece-Turkey-Cyprus.png"
 # FILENAME_IN = "data/Ireland-England-France.png"
 FILENAME_IN = "data/Sudan-Ethiopia-Somalia.png" # Input image file
-FILENAME_OUT = "data/Sudan-Ethiopia-Somalia_ndvi.png" # Image file to (create and / over)write to
-
+FILENAME_OUT = "data/ethiopianatparks_ndvi.png" # Image file to (create and / over)write to
 
 MASK_OUT_CLOUDS = True
 MASK_OUT_SEA = True
