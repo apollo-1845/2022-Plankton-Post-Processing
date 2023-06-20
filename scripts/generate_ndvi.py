@@ -6,7 +6,7 @@ sea will be masked out black and clouds will be grey."""
 import cv2 as cv
 import numpy as np
 
-USE_WHOLE_IMAGE = False # To crop the image in the process, set this to False.
+USE_WHOLE_IMAGE = True # To crop the image in the process, set this to False.
 MIN_X = 690 # X-coordinate of left side of crop you want (look in bottom status bar of MS Paint)
 MIN_Y = 6460 # Y-coordinate of top side of crop you want
 MAX_X = 1640 # X-coordinate of right side of crop you want
@@ -14,8 +14,8 @@ MAX_Y = 8420 # Y-coordinate of bottom side of crop you want
 
 # FILENAME_IN = "data/Europe-Greece-Turkey-Cyprus.png"
 # FILENAME_IN = "data/Ireland-England-France.png"
-FILENAME_IN = "data/Sudan-Ethiopia-Somalia.png" # Input image file
-FILENAME_OUT = "data/ethiopianatparks_ndvi.png" # Image file to (create and / over)write to
+FILENAME_IN = "data/Ireland-England-France.png" # Input image file
+FILENAME_OUT = "data/Ireland-England-France_ndvi.png" # Image file to (create and / over)write to
 
 MASK_OUT_CLOUDS = True
 MASK_OUT_SEA = True
@@ -50,11 +50,11 @@ r_float = r.astype(float)
 b_float = b.astype(float)
 # g_float = g.astype(float)
 if(MASK_OUT_CLOUDS):
-    cloud_mask = (r_float+b_float > 400) | (ndvi < 0)
+    cloud_mask = (b > 120) & (g-b < 20)
+    ndvi[cloud_mask] = 0
 if(MASK_OUT_SEA):
     sea_mask = (b < 120)
-
-ndvi[sea_mask] = 0
+    ndvi[sea_mask] = 0
 
 ndvi = contrast_stretch(ndvi)
 
@@ -70,13 +70,15 @@ b[ndvi == 0] = 0
 g[ndvi == 0] = 0
 r[ndvi == 0] = 0
 
-b[cloud_mask] = 128
-g[cloud_mask] = 128
-r[cloud_mask] = 128
+if(MASK_OUT_CLOUDS):
+    b[cloud_mask] = 128
+    g[cloud_mask] = 128
+    r[cloud_mask] = 128
 
-b[sea_mask] = 0
-g[sea_mask] = 0
-r[sea_mask] = 0
+if(MASK_OUT_SEA):
+    b[sea_mask] = 0
+    g[sea_mask] = 0
+    r[sea_mask] = 0
 
 image = cv.merge([b, g, r])
 # image = cv.merge([ndvi,ndvi,ndvi]) - for pure greyscale NDVI image

@@ -24,7 +24,7 @@ to 100).
 import cv2 as cv
 import numpy as np
 
-place = "ethiopiannatparks"
+place = "channellarge"
 
 FILENAME_OVERLAY = f"data/ignore/{place}_over.png"
 FILENAME_IN = f"data/ignore/{place}_under.png"
