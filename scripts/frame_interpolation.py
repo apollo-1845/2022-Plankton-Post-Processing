@@ -4,6 +4,8 @@ Uses Google's FiLM model to interpolate frames between our useful images.
 
 Code adapted from https://www.tensorflow.org/hub/tutorials/tf_hub_film_example
 
+While some parts of the video did seem to work, most of the end result was too jittery and/or reshaped compared to the images so we decided not to use this.
+
 """
 
 import tensorflow as tf
